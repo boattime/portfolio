@@ -84,9 +84,81 @@
   - [x] Test cancellation
   - [x] Test graceful shutdown
 
-## Phase 2: Data Collection
+## Phase 2: Rendering System
 
-### Step 2.1: Metric Collector
+### Step 2.1: Multi-Format Templating
+- [ ] Update templating module:
+  - [ ] src/templating/mod.rs
+  - [ ] src/templating/engine.rs
+  - [ ] src/templating/template.rs
+  - [ ] src/templating/renderer.rs
+- [ ] Define format-agnostic intermediate representation:
+  - [ ] Create Block enum for different content types
+  - [ ] Create TemplateData struct to hold processed templates
+  - [ ] Implement helper methods for template processing
+- [ ] Implement Renderer trait:
+  - [ ] Define methods for rendering different block types
+  - [ ] Create main render_template method for final output
+- [ ] Create HTML renderer:
+  - [ ] Implement Renderer trait for HTML output
+  - [ ] Build HTML elements from template blocks
+  - [ ] Apply CSS styling
+- [ ] Create Text renderer:
+  - [ ] Implement Renderer trait for plain text output
+  - [ ] Create ASCII art versions of UI elements
+  - [ ] Ensure consistent spacing and alignment
+- [ ] Update template processing:
+  - [ ] Modify parser to create block-based representation
+  - [ ] Implement directives for structure definition
+  - [ ] Create helper methods for template manipulation
+- [ ] Write unit tests:
+  - [ ] Test block creation and manipulation
+  - [ ] Test HTML rendering
+  - [ ] Test text rendering
+  - [ ] Compare outputs for consistency
+
+### Step 2.2: Terminal-Like CSS (HTML Format)
+- [ ] Create CSS assets:
+  - [ ] src/assets/css/terminal.css
+  - [ ] src/assets/css/layout.css
+- [ ] Implement terminal styling:
+  - [ ] Monospace font setup
+  - [ ] Dark background with light text
+  - [ ] Terminal prompt styling
+  - [ ] Blinking cursor effect
+- [ ] Add command-line styling:
+  - [ ] Command input styling
+  - [ ] Command output styling
+  - [ ] Different styles for different output types
+- [ ] Implement responsive design:
+  - [ ] Mobile-friendly layout
+  - [ ] Adapts to different screen sizes
+- [ ] Write tests:
+  - [ ] Verify CSS generation
+  - [ ] Test with different viewports
+
+### Step 2.3: ASCII Art Styling (Text Format)
+- [ ] Create text styling utilities:
+  - [ ] src/templating/text_styles.rs
+- [ ] Implement ASCII art components:
+  - [ ] Box drawing for frames and tables
+  - [ ] Status indicators and progress bars
+  - [ ] Command prompt styling
+- [ ] Add text layout utilities:
+  - [ ] Text wrapping and alignment
+  - [ ] Table formatting
+  - [ ] Indentation management
+- [ ] Create visualization utilities:
+  - [ ] ASCII bar charts and graphs
+  - [ ] Simple data visualization techniques
+- [ ] Write tests:
+  - [ ] Test ASCII component generation
+  - [ ] Verify formatting and layout
+  - [ ] Test with different terminal widths
+
+## Phase 3: Data Collection
+
+### Step 3.1: Metric Collector
 - [ ] Add Prometheus client dependencies
 - [ ] Create collector module structure:
   - [ ] src/collectors/mod.rs
@@ -110,7 +182,7 @@
   - [ ] Test error handling and retries
   - [ ] Test caching behavior
 
-### Step 2.2: Trace Aggregator
+### Step 3.2: Trace Aggregator
 - [ ] Create trace collector module:
   - [ ] src/collectors/trace_aggregator.rs
 - [ ] Implement TraceAggregator struct:
@@ -137,7 +209,7 @@
   - [ ] Test latency calculations
   - [ ] Test statistical aggregation
 
-### Step 2.3: Log Parser
+### Step 3.3: Log Parser
 - [ ] Create log parser module:
   - [ ] src/collectors/log_parser.rs
 - [ ] Implement LogParser struct:
@@ -162,53 +234,9 @@
   - [ ] Test different formats
   - [ ] Test filtering logic
 
-## Phase 3: Templating System
+## Phase 4: Page Generation
 
-### Step 3.1: HTML Template Engine
-- [ ] Create templating module:
-  - [ ] src/templating/mod.rs
-  - [ ] src/templating/engine.rs
-  - [ ] src/templating/template.rs
-- [ ] Implement Template struct:
-  - [ ] Template content storage
-  - [ ] Parsed representation
-- [ ] Create TemplateEngine:
-  - [ ] Template loading from disk
-  - [ ] Template caching
-  - [ ] Variable substitution
-- [ ] Add rendering functionality:
-  - [ ] Simple variable substitution
-  - [ ] Conditional rendering
-  - [ ] Partial template inclusion
-- [ ] Implement HTML generation:
-  - [ ] Create base HTML structure
-  - [ ] Generate complete pages
-- [ ] Write unit tests:
-  - [ ] Test template loading
-  - [ ] Test variable substitution
-  - [ ] Test conditional rendering
-
-### Step 3.2: Terminal-Like CSS
-- [ ] Create CSS assets:
-  - [ ] src/assets/css/terminal.css
-  - [ ] src/assets/css/layout.css
-- [ ] Implement terminal styling:
-  - [ ] Monospace font setup
-  - [ ] Dark background with light text
-  - [ ] Terminal prompt styling
-  - [ ] Blinking cursor effect
-- [ ] Add command-line styling:
-  - [ ] Command input styling
-  - [ ] Command output styling
-  - [ ] Different styles for different output types
-- [ ] Implement responsive design:
-  - [ ] Mobile-friendly layout
-  - [ ] Adapts to different screen sizes
-- [ ] Write tests:
-  - [ ] Verify CSS generation
-  - [ ] Test with different viewports
-
-### Step 3.3: Layout Components
+### Step 4.1: Page Component Implementation
 - [ ] Create component module:
   - [ ] src/templating/components.rs
 - [ ] Implement terminal components:
@@ -228,14 +256,18 @@
   - [ ] Metrics detail page
   - [ ] Trace detail page
   - [ ] Logs page
+- [ ] Update HomeGeneratorTask:
+  - [ ] Generate both HTML and text formats
+  - [ ] Use the same template data for both formats
+  - [ ] Output to separate files (index.html, index.txt)
 - [ ] Write tests:
-  - [ ] Test component rendering
+  - [ ] Test component rendering in both formats
   - [ ] Test layouts
-  - [ ] Test responsiveness
+  - [ ] Test consistency between formats
 
-## Phase 4: Concurrency Implementation
+## Phase 5: Concurrency Implementation
 
-### Step 4.1: Thread Pool
+### Step 5.1: Thread Pool
 - [ ] Create concurrency module:
   - [ ] src/concurrency/mod.rs
   - [ ] src/concurrency/thread_pool.rs
@@ -263,7 +295,7 @@
   - [ ] Test job completion
   - [ ] Test graceful shutdown
 
-### Step 4.2: Concurrent Data Processing
+### Step 5.2: Concurrent Data Processing
 - [ ] Enhance data collectors for concurrency:
   - [ ] Update metric collection for parallel queries
   - [ ] Modify trace aggregation for concurrent processing
@@ -286,17 +318,20 @@
   - [ ] Test result correctness
   - [ ] Benchmark performance improvements
 
-### Step 4.3: Concurrency Visualization
+### Step 5.3: Concurrency Visualization
 - [ ] Create visualization module:
   - [ ] src/visualization/concurrency_viz.rs
 - [ ] Implement instrumentation:
   - [ ] Thread activity recording
   - [ ] Task timing measurement
   - [ ] Resource usage tracking
-- [ ] Add visualization generation:
+- [ ] Add visualization generation for HTML:
   - [ ] Create SVG timeline of thread activity
   - [ ] Generate work distribution visualization
   - [ ] Show task dependencies
+- [ ] Add visualization generation for text:
+  - [ ] ASCII art timeline of thread activity
+  - [ ] Text-based work distribution visualization
 - [ ] Implement performance metrics:
   - [ ] Calculate speedup from concurrency
   - [ ] Measure efficiency
@@ -305,12 +340,13 @@
   - [ ] CSS-only interactivity (hover effects)
   - [ ] Zoomable timeline
 - [ ] Write tests:
-  - [ ] Test visualization generation
+  - [ ] Test visualization generation in both formats
   - [ ] Test metric calculations
+  - [ ] Compare HTML and text visualizations
 
-## Phase 5: Visualization Generation
+## Phase 6: Visualization Generation
 
-### Step 5.1: SVG Chart Generation
+### Step 6.1: HTML Chart Generation
 - [ ] Create visualization module:
   - [ ] src/visualization/mod.rs
   - [ ] src/visualization/svg_chart.rs
@@ -339,7 +375,27 @@
   - [ ] Test data scaling
   - [ ] Test different chart types
 
-### Step 5.2: Static Asset Optimization
+### Step 6.2: Text Chart Generation
+- [ ] Create terminal chart module:
+  - [ ] src/visualization/terminal_chart.rs
+- [ ] Implement ASCII-art style graphs:
+  - [ ] Bar charts using block characters
+  - [ ] Sparklines for trends
+  - [ ] Tables for data
+- [ ] Add text-based styling:
+  - [ ] Terminal-inspired characters
+  - [ ] Monospace alignment
+  - [ ] Grid patterns
+- [ ] Implement data mapping:
+  - [ ] Scale data to character height
+  - [ ] Character selection based on values
+  - [ ] Ensure visual consistency with HTML charts
+- [ ] Write tests:
+  - [ ] Test chart generation
+  - [ ] Test appearance
+  - [ ] Compare with HTML charts for consistency
+
+### Step 6.3: Static Asset Optimization
 - [ ] Create asset optimizer:
   - [ ] src/assets/optimizer.rs
 - [ ] Implement CSS minification:
@@ -363,32 +419,9 @@
   - [ ] Verify file size reduction
   - [ ] Test versioning
 
-### Step 5.3: Terminal-Style Graphs
-- [ ] Create terminal chart module:
-  - [ ] src/visualization/terminal_chart.rs
-- [ ] Implement ASCII-art style graphs:
-  - [ ] Bar charts using block characters
-  - [ ] Sparklines for trends
-  - [ ] Tables for data
-- [ ] Add CSS-based styling:
-  - [ ] Terminal-inspired colors
-  - [ ] Monospace alignment
-  - [ ] Grid patterns
-- [ ] Implement data mapping:
-  - [ ] Scale data to character height
-  - [ ] Character selection based on values
-  - [ ] Color mapping for values
-- [ ] Create interactive elements:
-  - [ ] Hover effects
-  - [ ] Tooltips using pure CSS
-- [ ] Write tests:
-  - [ ] Test chart generation
-  - [ ] Test appearance
-  - [ ] Test responsiveness
+## Phase 7: AWS Deployment
 
-## Phase 6: AWS Deployment
-
-### Step 6.1: S3 Integration
+### Step 7.1: S3 Integration
 - [ ] Create deployment module:
   - [ ] src/deployment/mod.rs
   - [ ] src/deployment/s3_uploader.rs
@@ -404,7 +437,7 @@
   - [ ] Upload only modified files
   - [ ] Handle deletions
 - [ ] Implement content type detection:
-  - [ ] Set correct MIME types
+  - [ ] Set correct MIME types (HTML and text)
   - [ ] Configure caching headers
   - [ ] Set metadata
 - [ ] Add multi-part uploads:
@@ -416,7 +449,7 @@
   - [ ] Test error handling
   - [ ] Test synchronization logic
 
-### Step 6.2: CloudFront Setup
+### Step 7.2: CloudFront Setup
 - [ ] Create CloudFront module:
   - [ ] src/deployment/cloudfront.rs
 - [ ] Add AWS SDK dependencies:
@@ -433,6 +466,7 @@
   - [ ] Set up proper caching rules
   - [ ] Configure SSL/TLS
   - [ ] Set up custom domain
+  - [ ] Configure content type handling
 - [ ] Add performance settings:
   - [ ] Enable compression
   - [ ] Configure edge locations
@@ -442,7 +476,7 @@
   - [ ] Test invalidation logic
   - [ ] Test configuration generation
 
-### Step 6.3: Deployment Automation
+### Step 7.3: Deployment Automation
 - [ ] Create deployment scripts:
   - [ ] scripts/deploy.sh
   - [ ] src/deployment/deployer.rs
@@ -467,9 +501,9 @@
   - [ ] Test rollback functionality
   - [ ] Test error scenarios
 
-## Phase 7: System Integration
+## Phase 8: System Integration
 
-### Step 7.1: Component Integration
+### Step 8.1: Component Integration
 - [ ] Create site generator:
   - [ ] src/site_generator.rs
 - [ ] Implement generation orchestration:
@@ -497,7 +531,7 @@
   - [ ] Test with different configurations
   - [ ] Test error scenarios
 
-### Step 7.2: Performance Optimization
+### Step 8.2: Performance Optimization
 - [ ] Create performance module:
   - [ ] src/performance/mod.rs
   - [ ] src/performance/profiler.rs
@@ -526,7 +560,7 @@
   - [ ] Track improvements
   - [ ] Compare configurations
 
-### Step 7.3: Final Testing and Polishing
+### Step 8.3: Final Testing and Polishing
 - [ ] Create comprehensive tests:
   - [ ] tests/integration_tests.rs
   - [ ] tests/performance_tests.rs
@@ -539,6 +573,7 @@
   - [ ] Code documentation
   - [ ] Architecture diagrams
   - [ ] User guides
+  - [ ] Sample curl commands
 - [ ] Implement error handling improvements:
   - [ ] Review all error paths
   - [ ] Add detailed error messages
@@ -550,7 +585,7 @@
 - [ ] Create examples:
   - [ ] Sample configurations
   - [ ] Demo setups
-  - [ ] Usage examples
+  - [ ] Usage examples for both formats
 
 ## Additional Tasks
 
@@ -568,6 +603,7 @@
 - [ ] Document configuration options
 - [ ] Add API documentation
 - [ ] Create contribution guidelines
+- [ ] Document curl usage examples
 
 ### Testing Infrastructure
 - [ ] Set up test environment
@@ -575,6 +611,7 @@
 - [ ] Implement integration test fixtures
 - [ ] Add performance benchmarking tool
 - [ ] Create test coverage reporting
+- [ ] Test format consistency
 
 ### Release Management
 - [ ] Create versioning scheme
