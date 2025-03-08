@@ -24,69 +24,65 @@
   - [x] Add log levels for different components
 
 ### Step 1.2: Core Data Structures
-- [ ] Create models directory and module structure:
-  - [ ] src/models/mod.rs (exports)
-  - [ ] src/models/metric.rs
-  - [ ] src/models/trace.rs
-  - [ ] src/models/log_entry.rs
-- [ ] Implement Metric struct:
-  - [ ] name: String
-  - [ ] value: f64
-  - [ ] timestamp: DateTime<Utc>
-  - [ ] labels: HashMap<String, String>
-  - [ ] Implement serialization/deserialization
-  - [ ] Add helper methods for creation and manipulation
-  - [ ] Write unit tests
-- [ ] Implement Trace struct:
-  - [ ] name: String
-  - [ ] duration_ms: u64
-  - [ ] start_time/end_time: DateTime<Utc>
-  - [ ] parent_id: Option<String>
-  - [ ] span_id: String
-  - [ ] metadata: HashMap<String, String>
-  - [ ] Implement serialization/deserialization
-  - [ ] Add helper methods
-  - [ ] Write unit tests
-- [ ] Implement LogEntry struct:
-  - [ ] message: String
-  - [ ] level: LogLevel enum (Debug, Info, Warning, Error)
-  - [ ] timestamp: DateTime<Utc>
-  - [ ] source: String
-  - [ ] metadata: HashMap<String, String>
-  - [ ] Implement serialization/deserialization
-  - [ ] Add helper methods
-  - [ ] Write unit tests
-- [ ] Create storage module:
-  - [ ] src/storage/mod.rs
-  - [ ] Implement thread-safe storage for each data type
-  - [ ] Add CRUD operations
-  - [ ] Write unit tests for storage
-- [ ] Create simple CLI interface
-  - [ ] Define command-line arguments
-  - [ ] Implement argument parsing
-  - [ ] Add help text and version info
+- [x] Create models directory and module structure:
+  - [x] src/models/mod.rs (exports)
+  - [x] src/models/metric.rs
+  - [x] src/models/trace.rs
+  - [x] src/models/log.rs
+- [x] Implement Metric struct:
+  - [x] name: String
+  - [x] value: f64
+  - [x] timestamp: DateTime<Utc>
+  - [x] labels: HashMap<String, String>
+  - [x] Implement serialization/deserialization
+  - [x] Add helper methods for creation and manipulation
+  - [x] Write unit tests
+- [x] Implement Trace struct:
+  - [x] name: String
+  - [x] duration_ms: u64
+  - [x] start_time/end_time: DateTime<Utc>
+  - [x] parent_id: Option<String>
+  - [x] span_id: String
+  - [x] metadata: HashMap<String, String>
+  - [x] Implement serialization/deserialization
+  - [x] Add helper methods
+  - [x] Write unit tests
+- [x] Implement LogEntry struct:
+  - [x] message: String
+  - [x] level: LogLevel enum (Debug, Info, Warning, Error)
+  - [x] timestamp: DateTime<Utc>
+  - [x] source: String
+  - [x] metadata: HashMap<String, String>
+  - [x] Implement serialization/deserialization
+  - [x] Add helper methods
+  - [x] Write unit tests
+- [x] Create storage module:
+  - [x] src/storage/mod.rs
+  - [x] Implement thread-safe storage for each data type
+  - [x] Add CRUD operations
+  - [x] Write unit tests for storage
 
 ### Step 1.3: Basic Scheduler
-- [ ] Create scheduler module:
-  - [ ] src/scheduler.rs
-- [ ] Implement Scheduler struct:
-  - [ ] Configuration options
-  - [ ] Thread-safe task queue
-  - [ ] Timing mechanism using tokio or std::thread
-- [ ] Create Job representation:
-  - [ ] Interval duration
-  - [ ] Callback function/closure
-  - [ ] Job ID and metadata
-- [ ] Implement scheduling methods:
-  - [ ] schedule() to add new jobs
-  - [ ] cancel() to remove jobs
-  - [ ] shutdown() for graceful termination
-- [ ] Add thread-safety with Arc/Mutex
-- [ ] Implement interval calculation and management
-- [ ] Write unit tests:
-  - [ ] Test scheduling accuracy
-  - [ ] Test cancellation
-  - [ ] Test graceful shutdown
+- [x] Create scheduler module:
+  - [x] src/scheduler.rs
+- [x] Implement Scheduler struct:
+  - [x] Configuration options
+  - [x] Thread-safe task queue
+  - [x] Timing mechanism using tokio or std::thread
+- [x] Create Job representation:
+  - [x] Interval duration
+  - [x] Callback function/closure
+  - [x] Job ID and metadata
+- [x] Implement scheduling methods:
+  - [x] schedule() to add new jobs
+  - [x] cancel() to remove jobs
+  - [x] shutdown() for graceful termination
+- [x] Add thread-safety with Arc/Mutex
+- [x] Implement interval calculation and management
+- [x] Write unit tests:
+  - [x] Test scheduling accuracy
+  - [x] Test cancellation
+  - [x] Test graceful shutdown
 
 ## Phase 2: Data Collection
 
