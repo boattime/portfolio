@@ -92,7 +92,8 @@ impl TextRenderer {
 
         if let Some(title_text) = title {
             let title_text = format!(" {} ", title_text);
-            let padding = box_width - title_text.len() - 2;
+            let title_len = title_text.chars().count();
+            let padding = box_width.saturating_sub(title_len + 2);
             result.push_str(&format!(
                 "{}{}{}{}",
                 box_chars.top_left,
@@ -112,7 +113,7 @@ impl TextRenderer {
 
         for line in lines {
             let line_width = line.chars().count();
-            let padding = box_width - line_width - 4;
+            let padding = box_width.saturating_sub(line_width + 4);
             result.push_str(&format!(
                 "{} {} {} {}\n",
                 box_chars.vertical,
