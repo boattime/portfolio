@@ -1,0 +1,33 @@
+@heading{1}{System Dashboard}
+
+Welcome to the terminal-style system dashboard. Current status as of @var{current_time}.
+Host: @var{hostname} | Metrics: @var{metric_count} | Logs: @var{log_count} | Traces: @var{trace_count}
+
+@command{system metrics}
+@output{
+  @metrics
+}
+
+@frame{Recent System Logs}{
+  @logs
+}
+
+@frame{Performance Traces}{
+  @traces
+}
+
+@command{help}
+@output{
+  @paragraph{Available commands:}
+  
+  @paragraph{- system metrics: Display current system metrics}
+  @paragraph{- system logs: Show detailed system logs}
+  @paragraph{- system traces: View performance trace information}
+  @paragraph{- help: Display this help information}
+}
+
+@frame{System Information}{
+  @paragraph{This dashboard is automatically generated every 30 seconds.}
+  @paragraph{Available in both HTML and text formats.}
+  @paragraph{For text-only version, use: curl https://your-site.com/index.txt}
+}
