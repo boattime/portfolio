@@ -39,31 +39,32 @@ impl HtmlRenderer {
             line-height: 1.5;
             max-width: 100%;
             box-sizing: border-box;
+            font-size: 16px;
         }
-        
+
         .terminal-command {
             color: #63c8ff;
             margin: 0.5rem 0;
         }
-        
+
         .terminal-command::before {
             content: '$ ';
             color: #63c8ff;
         }
-        
+
         .terminal-output {
             margin: 0.5rem 0 1.5rem 0;
             padding-left: 0.5rem;
             border-left: 2px solid #3a3a3a;
         }
-        
+
         .terminal-frame {
             border: 1px solid #3a3a3a;
             padding: 0.5rem;
             margin: 0.5rem 0;
             border-radius: 0.3rem;
         }
-        
+
         .terminal-frame-title {
             background-color: #3a3a3a;
             padding: 0.3rem 0.5rem;
@@ -71,88 +72,190 @@ impl HtmlRenderer {
             border-radius: 0.3rem 0.3rem 0 0;
             font-weight: bold;
         }
-        
+
         .terminal-metric {
             display: flex;
             justify-content: space-between;
             padding: 0.3rem 0;
         }
-        
+
         .terminal-metric-name {
             font-weight: bold;
         }
-        
+
         .terminal-metric-value {
             color: #63c8ff;
         }
-        
+
         .terminal-log {
             padding: 0.2rem 0;
         }
-        
+
         .terminal-log-debug {
             color: #9e9e9e;
         }
-        
+
         .terminal-log-info {
             color: #63c8ff;
         }
-        
+
         .terminal-log-warning {
             color: #ffac35;
         }
-        
+
         .terminal-log-error {
             color: #ff5b5b;
         }
-        
+
+        .terminal-table-container {
+            margin: 0.5rem 0;
+            overflow-x: auto;
+        }
+
         .terminal-table {
             border-collapse: collapse;
             width: 100%;
-            margin: 0.5rem 0;
+            margin: 0;
         }
-        
+
         .terminal-table th {
             text-align: left;
             padding: 0.3rem;
             border-bottom: 1px solid #3a3a3a;
             color: #63c8ff;
         }
-        
+
         .terminal-table td {
             padding: 0.3rem;
             border-bottom: 1px solid #2a2a2a;
         }
-        
+
         .terminal-trace {
             padding: 0.3rem 0;
         }
-        
+
         .terminal-trace-name {
             font-weight: bold;
         }
-        
+
         .terminal-trace-duration {
             color: #63c8ff;
         }
-        
+
         .terminal-trend-up::after {
             content: ' ▲';
             color: #4caf50;
         }
-        
+
         .terminal-trend-down::after {
             content: ' ▼';
             color: #ff5b5b;
         }
-        
+
+        .terminal-heading {
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            color: #63c8ff;
+        }
+
+        .terminal-heading-1 {
+            font-size: 1.8rem;
+        }
+
+        .terminal-heading-2 {
+            font-size: 1.5rem;
+        }
+
+        .terminal-heading-3 {
+            font-size: 1.3rem;
+        }
+
+        .terminal-paragraph {
+            margin: 0.5rem 0;
+        }
+
+        /* Mobile-specific adjustments */
         @media (max-width: 768px) {
             .terminal {
                 padding: 0.5rem;
+                font-size: 14px;
+                line-height: 1.4;
             }
-            
+
+            .terminal-heading-1 {
+                font-size: 1.5rem;
+            }
+
+            .terminal-heading-2 {
+                font-size: 1.3rem;
+            }
+
+            .terminal-heading-3 {
+                font-size: 1.1rem;
+            }
+
             .terminal-table {
                 font-size: 0.9rem;
+            }
+
+            .terminal-output {
+                padding-left: 0.3rem;
+                margin: 0.3rem 0 1rem 0;
+            }
+
+            .terminal-frame {
+                padding: 0.4rem;
+                margin: 0.4rem 0;
+            }
+
+            .terminal-frame-title {
+                padding: 0.2rem 0.4rem;
+                margin: -0.4rem -0.4rem 0.4rem -0.4rem;
+            }
+
+            /* Stack elements vertically on small screens */
+            .terminal-metric {
+                flex-direction: column;
+                align-items: flex-start;
+                border-bottom: 1px solid #3a3a3a;
+                padding-bottom: 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .terminal-metric-value {
+                margin-top: 0.2rem;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .terminal {
+                padding: 0.4rem;
+                font-size: 13px;
+            }
+
+            .terminal-command::before {
+                content: '> '; /* Shorter prompt on very small screens */
+            }
+
+            .terminal-frame {
+                padding: 0.3rem;
+            }
+
+            .terminal-frame-title {
+                padding: 0.2rem 0.3rem;
+                margin: -0.3rem -0.3rem 0.3rem -0.3rem;
+                font-size: 0.9rem;
+            }
+
+            .terminal-table th,
+            .terminal-table td {
+                padding: 0.2rem;
+            }
+
+            .terminal-log {
+                line-height: 1.3;
+                word-break: break-word;
             }
         }
         "#
@@ -400,7 +503,7 @@ impl Renderer for HtmlRenderer {
             <html lang=\"en\">
             <head>
                 <meta charset=\"UTF-8\">
-                <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+                <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0\">
                 <title>{}</title>
                 {}
             </head>
