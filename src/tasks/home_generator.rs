@@ -152,7 +152,7 @@ mod tests {
 
         let template_content = r#"@heading{1}{Dashboard}
         
-Welcome to the system dashboard. Current status as of @var{current_time}.
+@paragraph{Welcome to the system dashboard. Current status as of [[current_time]].}
 
 @command{system status}
 @output{

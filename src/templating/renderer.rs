@@ -55,9 +55,6 @@ pub enum Block {
 #[derive(Debug, Clone)]
 pub struct TemplateData {
     pub blocks: Vec<Block>,
-
-    pub variables: HashMap<String, String>,
-
     pub template_name: String,
 }
 

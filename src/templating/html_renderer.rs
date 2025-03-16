@@ -837,7 +837,6 @@ mod tests {
                 },
                 Block::Paragraph("System Status".to_string()),
             ],
-            variables,
             template_name: "dashboard".to_string(),
         };
 

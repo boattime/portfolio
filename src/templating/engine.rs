@@ -119,19 +119,21 @@ impl TemplateEngine {
         context: &TemplateContext,
         renderer: &R,
     ) -> Result<String> {
-        let mut template = self.load_template(template_name)?;
-
-        template.set_variables(context.variables.clone());
+        let template = self.load_template(template_name)?;
 
         let processed_blocks = self.process_blocks(&template.blocks, context)?;
 
         let template_data = TemplateData {
             blocks: processed_blocks,
-            variables: template.variables.clone(),
             template_name: template.name.clone(),
         };
 
-        renderer.render_template(&template_data)
+        let rendered_content = renderer.render_template(&template_data)?;
+
+        let final_content =
+            self.substitute_variables_in_content(&rendered_content, &context.variables);
+
+        Ok(final_content)
     }
 
     fn process_blocks(&self, blocks: &[Block], context: &TemplateContext) -> Result<Vec<Block>> {
@@ -235,6 +237,21 @@ impl TemplateEngine {
         Ok(processed_blocks)
     }
 
+    fn substitute_variables_in_content(
+        &self,
+        content: &str,
+        variables: &HashMap<String, String>,
+    ) -> String {
+        let mut result = content.to_string();
+
+        for (name, value) in variables {
+            let pattern = format!("[[{}]]", name);
+            result = result.replace(&pattern, value);
+        }
+
+        result
+    }
+
     pub fn write_output<P: AsRef<Path>>(
         &self,
         html_content: &str,
@@ -281,7 +298,7 @@ mod tests {
         let mut temp_file = NamedTempFile::new().unwrap();
         let template_content = r#"@heading{1}{Dashboard Overview}
 
-Welcome to the system dashboard. Current status as of @var{current_time}.
+@paragraph{Welcome to the system dashboard. Current status as of [[current_time]].}
 
 @command{system status}
 

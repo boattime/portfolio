@@ -7,11 +7,8 @@ use std::path::Path;
 #[derive(Debug, Clone)]
 pub struct Template {
     pub name: String,
-
     pub content: String,
-
     pub blocks: Vec<Block>,
-
     pub variables: HashMap<String, String>,
 }
 
@@ -49,7 +46,6 @@ impl Template {
     pub fn to_template_data(&self) -> TemplateData {
         TemplateData {
             blocks: self.blocks.clone(),
-            variables: self.variables.clone(),
             template_name: self.name.clone(),
         }
     }
@@ -60,6 +56,17 @@ impl Template {
 
     pub fn set_variables(&mut self, variables: HashMap<String, String>) {
         self.variables.extend(variables);
+    }
+
+    pub fn substitute_variables(&self) -> String {
+        let mut result = self.content.to_string();
+
+        for (name, value) in &self.variables {
+            let pattern = format!("{{{{{}}}}}", name);
+            result = result.replace(&pattern, value);
+        }
+
+        result
     }
 }
 
@@ -104,11 +111,6 @@ impl<'a> TemplateParser<'a> {
                 return Ok(Some(Block::Raw("@logs".to_string())));
             } else if self.match_string("traces") {
                 return Ok(Some(Block::Raw("@traces".to_string())));
-            } else if self.match_string("var") {
-                self.expect_char('{')?;
-                let var_name = self.parse_until('}')?;
-                self.expect_char('}')?;
-                return Ok(Some(Block::Raw(format!("@var{{{}}}", var_name))));
             } else {
                 return self.parse_directive();
             }
@@ -792,15 +794,5 @@ mod tests {
         let template_content = "@heading{not_a_number}{Title}";
         let result = Template::from_string("test", template_content);
         assert!(result.is_err());
-    }
-
-    #[test]
-    fn test_template_variables() {
-        let mut template = Template::from_string("test", "@heading{1}{Hello @var{name}}").unwrap();
-
-        template.set_variable("name", "World");
-
-        let data = template.to_template_data();
-        assert_eq!(data.variables.get("name").unwrap(), "World");
     }
 }
