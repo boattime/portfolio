@@ -4,7 +4,7 @@ use crate::error::Result;
 use crate::models::{LogEntry, Metric, Trace};
 use crate::templating::renderer::{Block, Renderer, TemplateData};
 
-const DEFAULT_TERMINAL_WIDTH: usize = 80;
+const DEFAULT_TERMINAL_WIDTH: usize = 100;
 
 pub struct TextRenderer {
     pub terminal_width: usize,
@@ -115,7 +115,7 @@ impl TextRenderer {
             let line_width = line.chars().count();
             let padding = box_width.saturating_sub(line_width + 4);
             result.push_str(&format!(
-                "{} {} {} {}\n",
+                "{} {} {}{}\n",
                 box_chars.vertical,
                 line,
                 " ".repeat(padding),

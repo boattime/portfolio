@@ -504,7 +504,7 @@ impl Renderer for HtmlRenderer {
             <head>
                 <meta charset=\"UTF-8\">
                 <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0\">
-                <title>{}</title>
+                <title>[[title]]</title>
                 {}
             </head>
             <body>
@@ -512,7 +512,7 @@ impl Renderer for HtmlRenderer {
                 </div>
             </body>
             </html>",
-            template_data.template_name, style_tag, class_list, content
+            style_tag, class_list, content
         ))
     }
 

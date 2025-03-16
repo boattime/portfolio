@@ -112,6 +112,7 @@ impl HomeGeneratorTask {
         context = context.with_traces(traces);
         context = context.with_logs(logs);
 
+        context = context.with_variable("title", "Max Teibel");
         context = context.with_variable("hostname", "maxteibel-server");
 
         let metric_count = format!("{}", context.metrics.len());
@@ -169,15 +170,12 @@ mod tests {
 
         std::fs::write(template_dir.path().join("dashboard.tmpl"), template_content).unwrap();
 
-        // Create template engine
         let template_engine = Arc::new(TemplateEngine::new(template_dir.path()));
 
-        // Create storages
         let metric_storage = Arc::new(MetricStorage::new());
         let trace_storage = Arc::new(TraceStorage::new());
         let log_storage = Arc::new(LogStorage::new());
 
-        // Add sample data
         let metric = Metric::new("CPU Usage", 75.5)
             .with_label("host", "test-server")
             .with_label("unit", "%");
@@ -189,7 +187,6 @@ mod tests {
         let log = LogEntry::new("Server started", LogLevel::Info, "app");
         log_storage.add(log).unwrap();
 
-        // Create task
         let task = HomeGeneratorTask::new(
             template_engine,
             metric_storage,
@@ -198,32 +195,26 @@ mod tests {
             output_dir.path().to_string_lossy().to_string(),
         );
 
-        // Execute task
         task.execute().await.unwrap();
 
-        // Check if files were created
         let html_path = output_dir.path().join("index.html");
         let text_path = output_dir.path().join("index.txt");
 
         assert!(html_path.exists(), "HTML file was not created");
         assert!(text_path.exists(), "Text file was not created");
 
-        // Check content
         let html_content = std::fs::read_to_string(&html_path).unwrap();
         let text_content = std::fs::read_to_string(&text_path).unwrap();
 
-        // Verify HTML content
         assert!(html_content.contains("<!DOCTYPE html>"));
         assert!(html_content.contains("Dashboard"));
         assert!(html_content.contains("CPU Usage"));
         assert!(html_content.contains("Server started"));
 
-        // Verify text content
         assert!(text_content.contains("Dashboard"));
         assert!(text_content.contains("CPU Usage"));
         assert!(text_content.contains("Server started"));
 
-        // Clean up
         let _ = std::fs::remove_file(html_path);
         let _ = std::fs::remove_file(text_path);
     }
