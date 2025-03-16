@@ -142,10 +142,6 @@ impl TemplateEngine {
         for block in blocks {
             match block {
                 Block::Raw(content) if content.trim() == "@metrics" => {
-                    processed_blocks.push(Block::Raw(format!(
-                        "<!-- Metrics: {} -->",
-                        context.metrics.len()
-                    )));
                     for metric in &context.metrics {
                         let trend = metric
                             .get_label("trend")
@@ -162,8 +158,6 @@ impl TemplateEngine {
                 }
 
                 Block::Raw(content) if content.trim() == "@logs" => {
-                    processed_blocks
-                        .push(Block::Raw(format!("<!-- Logs: {} -->", context.logs.len())));
                     if context.logs.is_empty() {
                         processed_blocks.push(Block::Paragraph("No logs available.".to_string()));
                     } else {
@@ -192,10 +186,6 @@ impl TemplateEngine {
                 }
 
                 Block::Raw(content) if content.trim() == "@traces" => {
-                    processed_blocks.push(Block::Raw(format!(
-                        "<!-- Traces: {} -->",
-                        context.traces.len()
-                    )));
                     for trace in &context.traces {
                         let status = trace
                             .get_metadata("status")
