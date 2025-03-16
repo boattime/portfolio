@@ -10,6 +10,7 @@ use portfolio::{
 };
 use std::collections::HashMap;
 use std::{process, sync::Arc};
+use tokio::signal;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -53,11 +54,21 @@ async fn main() -> Result<()> {
 
     match scheduler.run().await {
         Ok(_) => {
-            info!("Scheduler completed successfully");
+            info!("Scheduler started successfully");
+
+            match signal::ctrl_c().await {
+                Ok(()) => {
+                    info!("Shutdown signal received, stopping scheduler...");
+                    scheduler.stop().await?;
+                    info!("Scheduler stopped gracefully");
+                }
+                Err(e) => error!("Error waiting for shutdown signal: {}", e),
+            }
+
             Ok(())
         }
         Err(e) => {
-            error!("Scheduler failed: {}", e);
+            error!("Scheduler failed to start: {}", e);
             Err(e)
         }
     }
