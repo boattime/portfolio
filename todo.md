@@ -87,74 +87,74 @@
 ## Phase 2: Rendering System
 
 ### Step 2.1: Multi-Format Templating
-- [ ] Update templating module:
-  - [ ] src/templating/mod.rs
-  - [ ] src/templating/engine.rs
-  - [ ] src/templating/template.rs
-  - [ ] src/templating/renderer.rs
-- [ ] Define format-agnostic intermediate representation:
-  - [ ] Create Block enum for different content types
-  - [ ] Create TemplateData struct to hold processed templates
-  - [ ] Implement helper methods for template processing
-- [ ] Implement Renderer trait:
-  - [ ] Define methods for rendering different block types
-  - [ ] Create main render_template method for final output
-- [ ] Create HTML renderer:
-  - [ ] Implement Renderer trait for HTML output
-  - [ ] Build HTML elements from template blocks
-  - [ ] Apply CSS styling
-- [ ] Create Text renderer:
-  - [ ] Implement Renderer trait for plain text output
-  - [ ] Create ASCII art versions of UI elements
-  - [ ] Ensure consistent spacing and alignment
-- [ ] Update template processing:
-  - [ ] Modify parser to create block-based representation
-  - [ ] Implement directives for structure definition
-  - [ ] Create helper methods for template manipulation
-- [ ] Write unit tests:
-  - [ ] Test block creation and manipulation
-  - [ ] Test HTML rendering
-  - [ ] Test text rendering
-  - [ ] Compare outputs for consistency
+- [x] Update templating module:
+  - [x] src/templating/mod.rs
+  - [x] src/templating/engine.rs
+  - [x] src/templating/template.rs
+  - [x] src/templating/renderer.rs
+- [x] Define format-agnostic intermediate representation:
+  - [x] Create Block enum for different content types
+  - [x] Create TemplateData struct to hold processed templates
+  - [x] Implement helper methods for template processing
+- [x] Implement Renderer trait:
+  - [x] Define methods for rendering different block types
+  - [x] Create main render_template method for final output
+- [x] Create HTML renderer:
+  - [x] Implement Renderer trait for HTML output
+  - [x] Build HTML elements from template blocks
+  - [x] Apply CSS styling
+- [x] Create Text renderer:
+  - [x] Implement Renderer trait for plain text output
+  - [x] Create ASCII art versions of UI elements
+  - [x] Ensure consistent spacing and alignment
+- [x] Update template processing:
+  - [x] Modify parser to create block-based representation
+  - [x] Implement directives for structure definition
+  - [x] Create helper methods for template manipulation
+- [x] Write unit tests:
+  - [x] Test block creation and manipulation
+  - [x] Test HTML rendering
+  - [x] Test text rendering
+  - [x] Compare outputs for consistency
 
 ### Step 2.2: Terminal-Like CSS (HTML Format)
-- [ ] Create CSS assets:
-  - [ ] src/assets/css/terminal.css
-  - [ ] src/assets/css/layout.css
-- [ ] Implement terminal styling:
-  - [ ] Monospace font setup
-  - [ ] Dark background with light text
-  - [ ] Terminal prompt styling
-  - [ ] Blinking cursor effect
-- [ ] Add command-line styling:
-  - [ ] Command input styling
-  - [ ] Command output styling
-  - [ ] Different styles for different output types
-- [ ] Implement responsive design:
-  - [ ] Mobile-friendly layout
-  - [ ] Adapts to different screen sizes
-- [ ] Write tests:
-  - [ ] Verify CSS generation
-  - [ ] Test with different viewports
+- [x] Create CSS assets:
+  - [x] src/assets/css/terminal.css
+  - [x] src/assets/css/layout.css
+- [x] Implement terminal styling:
+  - [x] Monospace font setup
+  - [x] Dark background with light text
+  - [x] Terminal prompt styling
+  - [x] Blinking cursor effect
+- [x] Add command-line styling:
+  - [x] Command input styling
+  - [x] Command output styling
+  - [x] Different styles for different output types
+- [x] Implement responsive design:
+  - [x] Mobile-friendly layout
+  - [x] Adapts to different screen sizes
+- [x] Write tests:
+  - [x] Verify CSS generation
+  - [x] Test with different viewports
 
 ### Step 2.3: ASCII Art Styling (Text Format)
-- [ ] Create text styling utilities:
-  - [ ] src/templating/text_styles.rs
-- [ ] Implement ASCII art components:
-  - [ ] Box drawing for frames and tables
-  - [ ] Status indicators and progress bars
-  - [ ] Command prompt styling
-- [ ] Add text layout utilities:
-  - [ ] Text wrapping and alignment
-  - [ ] Table formatting
-  - [ ] Indentation management
-- [ ] Create visualization utilities:
-  - [ ] ASCII bar charts and graphs
-  - [ ] Simple data visualization techniques
-- [ ] Write tests:
-  - [ ] Test ASCII component generation
-  - [ ] Verify formatting and layout
-  - [ ] Test with different terminal widths
+- [x] Create text styling utilities:
+  - [x] src/templating/text_styles.rs
+- [x] Implement ASCII art components:
+  - [x] Box drawing for frames and tables
+  - [x] Status indicators and progress bars
+  - [x] Command prompt styling
+- [x] Add text layout utilities:
+  - [x] Text wrapping and alignment
+  - [x] Table formatting
+  - [x] Indentation management
+- [x] Create visualization utilities:
+  - [x] ASCII bar charts and graphs
+  - [x] Simple data visualization techniques
+- [x] Write tests:
+  - [x] Test ASCII component generation
+  - [x] Verify formatting and layout
+  - [x] Test with different terminal widths
 
 ## Phase 3: Data Collection
 
@@ -237,33 +237,33 @@
 ## Phase 4: Page Generation
 
 ### Step 4.1: Page Component Implementation
-- [ ] Create component module:
-  - [ ] src/templating/components.rs
-- [ ] Implement terminal components:
-  - [ ] CommandPrompt component
-  - [ ] Output component
-  - [ ] TabContainer for organizing content
-- [ ] Add data display components:
-  - [ ] MetricDisplay for metrics
-  - [ ] TraceDisplay for traces
-  - [ ] LogDisplay for logs
-- [ ] Implement layout structure:
-  - [ ] Header with system info
-  - [ ] Main content area
-  - [ ] Sidebar for navigation
-- [ ] Add page templates:
-  - [ ] Dashboard page
-  - [ ] Metrics detail page
-  - [ ] Trace detail page
-  - [ ] Logs page
-- [ ] Update HomeGeneratorTask:
-  - [ ] Generate both HTML and text formats
-  - [ ] Use the same template data for both formats
-  - [ ] Output to separate files (index.html, index.txt)
-- [ ] Write tests:
-  - [ ] Test component rendering in both formats
-  - [ ] Test layouts
-  - [ ] Test consistency between formats
+- [x] Create component module:
+  - [x] src/templating/components.rs
+- [x] Implement terminal components:
+  - [x] CommandPrompt component
+  - [x] Output component
+  - [x] TabContainer for organizing content
+- [x] Add data display components:
+  - [x] MetricDisplay for metrics
+  - [x] TraceDisplay for traces
+  - [x] LogDisplay for logs
+- [x] Implement layout structure:
+  - [x] Header with system info
+  - [x] Main content area
+  - [x] Sidebar for navigation
+- [x] Add page templates:
+  - [x] Dashboard page
+  - [x] Metrics detail page
+  - [x] Trace detail page
+  - [x] Logs page
+- [x] Update HomeGeneratorTask:
+  - [x] Generate both HTML and text formats
+  - [x] Use the same template data for both formats
+  - [x] Output to separate files (index.html, index.txt)
+- [x] Write tests:
+  - [x] Test component rendering in both formats
+  - [x] Test layouts
+  - [x] Test consistency between formats
 
 ## Phase 5: Concurrency Implementation
 
