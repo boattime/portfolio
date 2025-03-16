@@ -35,8 +35,8 @@ impl HomeGeneratorTask {
     }
 
     async fn generate_site(&self) -> Result<()> {
-        info!("Generating dashboard content");
-        let (html_content, text_content) = self.generate_dashboard().await?;
+        info!("Generating home content");
+        let (html_content, text_content) = self.generate_home().await?;
 
         let output_path = Path::new(&self.output_dir);
         if !output_path.exists() {
@@ -50,11 +50,11 @@ impl HomeGeneratorTask {
             "index",
         )?;
 
-        info!("Dashboard generation completed");
+        info!("Home generation completed");
         Ok(())
     }
 
-    async fn generate_dashboard(&self) -> Result<(String, String)> {
+    async fn generate_home(&self) -> Result<(String, String)> {
         let now = Utc::now();
         let one_hour_ago = now - Duration::hours(1);
 
@@ -89,10 +89,10 @@ impl HomeGeneratorTask {
 
         let html_content =
             self.template_engine
-                .render("dashboard", &template_context, &html_renderer)?;
+                .render("home", &template_context, &html_renderer)?;
         let text_content =
             self.template_engine
-                .render("dashboard", &template_context, &text_renderer)?;
+                .render("home", &template_context, &text_renderer)?;
 
         Ok((html_content, text_content))
     }
@@ -168,7 +168,7 @@ mod tests {
   @traces
 }"#;
 
-        std::fs::write(template_dir.path().join("dashboard.tmpl"), template_content).unwrap();
+        std::fs::write(template_dir.path().join("home.tmpl"), template_content).unwrap();
 
         let template_engine = Arc::new(TemplateEngine::new(template_dir.path()));
 
